@@ -1,0 +1,44 @@
+{% extends 'products/layout.html' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block content %}
+
+<h2>Liste des produits</h2>
+
+<div class="row">
+
+    {% for p in products %}
+    <div class="col-md-4 mb-3">
+
+        <div class="card p-3 shadow-sm">
+
+            {% if p.image %}
+                <div class="text-center">
+                    <img src="{{ p.image.url }}"
+                         class="img-fluid"
+                         style="max-height:250px; width:auto; border-radius:12px;">
+                </div>
+            {% endif %}
+
+            <h5 class="mt-2">{{ p.name }}</h5>
+
+            <p class="text-muted">
+                {{ p.description }}
+            </p>
+
+            <h6>{{ p.price }} DH</h6>
+
+            <a href="{% url 'product_detail' p.id %}"
+               class="btn btn-primary btn-sm mt-2">
+                Voir produit
+            </a>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
