@@ -24,9 +24,20 @@
                 {{ product.price }} DH
             </h4>
 
-            <p>
-                {{ product.description }}
-            </p>
+            <p>{{ product.description }}</p>
+
+            {% if user.is_authenticated and not user.is_staff %}
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">
+                   Ajouter au panier
+                </a>
+            {% endif %}
+
+            {% if user.is_staff %}
+                <a href="/admin/products/product/{{ product.id }}/change/"
+                   class="btn btn-warning mt-2">
+                    Modifier produit
+                </a>
+            {% endif %}
 
             <a href="{% url 'product_list' %}"
                class="btn btn-primary btn-sm mt-3">
